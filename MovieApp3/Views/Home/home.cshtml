@@ -1,0 +1,453 @@
+@{
+    ViewData["Title"] = "home";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <!-- to render normally -->
+    <link rel="stylesheet" href="~/css/normalize.css">
+    <!-- Font awesome file -->
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <!-- Main css file -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&family=Roboto:wght@100;300;400;500;700;900&family=Romanesco&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+    <!-- Start the header -->
+    <div class="main-header">
+        <div class="container">
+            <div class="links">
+                <a href="~/Home/home">
+                    <img src="~/imgs/header-icon.png" alt="logo">
+                </a>
+                <ul>
+                    <li><a class="active" href="~/Home/home">Home</a></li>
+                    <li><a href="~/Home/tv_show">TV Shows</a></li>
+                    <li><a href="~/Home/movies">Movies</a></li>
+                    <li><a href="~/Home/watchlist">Watchlist</a></li>
+                </ul>
+            </div>
+            <div class="details">
+                <div class="search">
+                    @using(Html.BeginForm("search","home",FormMethod.Post)){
+                    <input type="text" name="value" class="searchField hidden" id="">
+                        
+                    }
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <a href="./login.html" class="icon">
+                        <!-- <i class="fa-solid fa-user"></i> -->
+                        <img src="~/imgs/@ViewBag.profile_picture" alt="">
+                    </a>
+                </div>
+                <ul>
+                    <li>
+                        <a href="~/Home/edit_profile">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            Edit Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/Home/review">
+                            <i class="fa-regular fa-star"></i>
+                            Your Rating
+                        </a>
+                    </li>
+                    <li>
+                        <button class="logout">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Sign Out
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- End the header -->
+    <!-- End the header -->
+     <div class="landing">
+        <!-- Start Background -->
+        <div class="home-background"></div>
+        <div class="overlay"></div>
+        <!-- End Background -->
+        <div class="container">
+            <h1>Shazam</h1>
+            <div class="action">
+                <button class="showTrailerBtn">View full trailer</button>
+                <a class="flat" href="./more-info.html">More Info</a>
+            </div>
+        </div>
+    </div>
+    <!-- End Landing section -->
+    <!-- Start What to watch Section -->
+    <div class="what-to-watch" id="tv-shows">
+        <div class="container">
+            <h2>What to watch</h2>
+            @using (Html.BeginForm("filtered", "Home", FormMethod.Post))
+            {
+                
+                    <div class="section-title">
+                        <h3>Top picks ></h3>
+                        <button type ="button" class="filter">
+                            <i class="fa-solid fa-sliders"></i>
+                            <span>Filter</span>
+                        </button>
+                        <ul class="filter-data hidden">
+                            <li>
+                                <button name="filter" value="Action">Action</button>
+                            <button name="filter" value="Adventure">Adventure</button>
+                            <button name="filter"  value="Anime">Anime</button>
+                            </li>
+                            <li>
+                            <button name="filter" value="Biography">Biography</button>
+                            <button name="filter" value="Comedy">Comedy</button>
+                            <button name="filter" value="Drama">Drama</button>
+                            </li>
+                            <li>
+                            <button name ="filter" value="Family">Family</button>
+                            <button name="filter" value="Fantansy">Fantansy</button>
+                            <button name="filter" value="Film-Noir">Film-Noir</button>
+                            </li>
+                            <li>
+                            <button name="filter" value="History">History</button>
+                            <button name="filter" value="Horror">Horror</button>
+                            <button name="filter" value="Music">Music</button>
+                            </li>
+                            <li>
+                            <button name="filter" value="Mystery">Mystery</button>
+                            <button name="filter" value="Romance">Romance</button>
+                            <button name="filter" value="Sci-Fic">Sci-Fic</button>
+                            </li>
+                            <li>
+                            <button name="filter" value="Thriller">Thriller</button>
+                            <button name ="filter" value="Thriller">War</button>
+                            <button name ="filter" value="Western">Western</button>
+                            </li>
+                        </ul>
+                    </div>
+            }
+
+            <div class="movies-container">
+                @foreach (var item in ViewBag.topick)
+                {
+                    <div class="movie-card">
+                        <div class="image">
+                            <a href="@Url.Action("movie_info","Home",new{movieId = item.Id})">
+                                <img src="@Url.Content(@item.poster)" alt="" />
+                            </a>
+
+                        </div>
+                        <div class="content">
+                            <div class="stars">
+                                <span class="rate">
+                                    <i class="fa-solid fa-star"></i>
+                                    @item.rating
+                                </span>
+                                <span>
+                                    <i class="fa-regular fa-star"></i>
+                                </span>
+                            </div>
+                            <p class="movie-title">
+                                @item.title
+                            </p>
+                            <button class="watchlist">
+                                <i class="fa-solid fa-plus"></i>
+                                Watchlist
+                            </button>
+                            <button class="trailer showTrailerBtn">
+                                <i class="fa-solid fa-play"></i>
+                                Trailer
+                            </button>
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- End What to watch Section -->
+    <!-- start Most popular section -->
+    <div class="most-popular" id="movies">
+        <div class="container">
+            <div class="section-title">
+                <h3>Most Popular ></h3>
+            </div>
+
+            <div class="movies-container">
+                <div class="movie-card">
+                    <div class="image">
+                        <img src="~/imgs/most popular/succssion.jpg" alt="">
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <span class="rate">
+                                <i class="fa-solid fa-star"></i>
+                                8.8
+                            </span>
+                            <span>
+                                <i class="fa-regular fa-star"></i>
+                            </span>
+                        </div>
+                        <p class="movie-title">
+                            succssion
+                        </p>
+                        <button class="watchlist">
+                            <i class="fa-solid fa-plus"></i>
+                            Watchlist
+                        </button>
+                        <button class="trailer showTrailerBtn">
+                            <i class="fa-solid fa-play"></i>
+                            Trailer
+                        </button>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <div class="image">
+                        <img src="~/imgs/most popular/ted lasso.jpg" alt="">
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <span class="rate">
+                                <i class="fa-solid fa-star"></i>
+                                8.8
+                            </span>
+                            <span>
+                                <i class="fa-regular fa-star"></i>
+                            </span>
+                        </div>
+                        <p class="movie-title">
+                            ted lasso
+                        </p>
+                        <button class="watchlist">
+                            <i class="fa-solid fa-plus"></i>
+                            Watchlist
+                        </button>
+                        <button class="trailer showTrailerBtn">
+                            <i class="fa-solid fa-play"></i>
+                            Trailer
+                        </button>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <div class="image">
+                        <img src="~/imgs/most popular/dungeons.jpg" alt="">
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <span class="rate">
+                                <i class="fa-solid fa-star"></i>
+                                7.8
+                            </span>
+                            <span>
+                                <i class="fa-regular fa-star"></i>
+                            </span>
+                        </div>
+                        <p class="movie-title">
+                            Dungeons & Dragons
+                        </p>
+                        <button class="watchlist">
+                            <i class="fa-solid fa-plus"></i>
+                            Watchlist
+                        </button>
+                        <button class="trailer showTrailerBtn">
+                            <i class="fa-solid fa-play"></i>
+                            Trailer
+                        </button>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <div class="image">
+                        <img src="~/imgs/most popular/john wick.jpg" alt="">
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <span class="rate">
+                                <i class="fa-solid fa-star"></i>
+                                8.3
+                            </span>
+                            <span>
+                                <i class="fa-regular fa-star"></i>
+                            </span>
+                        </div>
+                        <p class="movie-title">
+                            john wick
+                        </p>
+                        <button class="watchlist">
+                            <i class="fa-solid fa-plus"></i>
+                            Watchlist
+                        </button>
+                        <button class="trailer showTrailerBtn">
+                            <i class="fa-solid fa-play"></i>
+                            Trailer
+                        </button>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <div class="image">
+                        <img src="~/imgs/most popular/joker.jpg" alt="">
+                    </div>
+                    <div class="content">
+                        <div class="stars">
+                            <span class="rate">
+                                <i class="fa-solid fa-star"></i>
+                                8.4
+                            </span>
+                            <span>
+                                <i class="fa-regular fa-star"></i>
+                            </span>
+                        </div>
+                        <p class="movie-title">
+                            joker
+                        </p>
+                        <button class="watchlist">
+                            <i class="fa-solid fa-plus"></i>
+                            Watchlist
+                        </button>
+                        <button class="trailer">
+                            <i class="fa-solid fa-play"></i>
+                            Trailer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end Most popular section -->
+    <!-- Start Footer -->
+    <div class="footer">
+        <div class="container">
+            <!-- <img src="~/imgs/background.jpg" alt=""> -->
+            <p>We are social</p>
+            <div class="social-icons">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fas fa-home"></i>
+                <i class="fab fa-linkedin"></i>
+            </div>
+            <p class="copyright">&copy; 2023 <span>Movie</span> All Right Reserved</p>
+        </div>
+    </div>
+    <div class="model hidden trailer-model">
+        <button class="btn--close-modal">&times;</button>
+        <video src="~/videos/trailer.mp4" controls autoplay loop></video>
+    </div>
+    <div class="model-overlay hidden trailer-overlay"></div>
+    <!-- End Trailler PupUp -->
+    <!-- Start Logout pupup -->
+    <div class="model hidden logout-model">
+        <h2>Are you sure you want to logout?</h2>
+        <div class="actions">
+            <a class="logoutLink" href="~/Home/signup" class="flat logout">Logout</a>
+            <button class="cancel">Cancel</button>
+        </div>
+    </div>
+    <div class="model-overlay hidden logout-overlay"></div>
+
+    <!-- End Footer
+    <script  async src="~/Views/Home/script.js"></script>
+    -->
+    <script>
+       "use-strict";
+
+const trailerModel = document.querySelector(".trailer-model");
+const trailerOverlay = document.querySelector(".trailer-overlay");
+const showTrailerBtns = document.querySelectorAll(".showTrailerBtn");
+const closeTrailerBtn = document.querySelector(".btn--close-modal");
+
+const showLogoutBtn = document.querySelector(".logout");
+const closeLogoutBtn = document.querySelector(".cancel");
+const logoutModel = document.querySelector(".logout-model");
+const logoutOverlay = document.querySelector(".logout-overlay");
+
+const toggleFilterBtn = document.querySelector(".filter");
+const filteredData = document.querySelector(".filter-data ");
+
+const searchField = document.querySelector(".searchField");
+const toggleSearchBtn = document.querySelector(".fa-magnifying-glass");
+
+const openModel = (model, overlay) => {
+  model.classList.remove("hidden");
+  overlay.classList.remove("hidden");
+};
+
+const closeModel = (model, overlay) => {
+  model.classList.add("hidden");
+  overlay.classList.add("hidden");
+};
+
+// == Start Trailer Btns ==
+showTrailerBtns.forEach((btn) =>
+  btn.addEventListener(
+    "click",
+    openModel.bind(null, trailerModel, trailerOverlay)
+  )
+);
+closeTrailerBtn.addEventListener(
+  "click",
+  closeModel.bind(null, trailerModel, trailerOverlay)
+);
+trailerOverlay.addEventListener(
+  "click",
+  closeModel.bind(null, trailerModel, trailerOverlay)
+);
+// == End Trailer Btns ==
+
+// == Start Logout  ==
+showLogoutBtn.addEventListener(
+  "click",
+  openModel.bind(null, logoutModel, logoutOverlay)
+);
+
+closeLogoutBtn.addEventListener(
+  "click",
+  closeModel.bind(null, logoutModel, logoutOverlay)
+);
+
+logoutOverlay.addEventListener(
+  "click",
+  closeModel.bind(null, logoutModel, logoutOverlay)
+);
+// == End Logout  ==
+// == Filter ==
+toggleFilterBtn.addEventListener("click", () => {
+  filteredData.classList.toggle("hidden");
+});
+// == Filter ==
+// == Search ==
+toggleSearchBtn.addEventListener("click", () => {
+  searchField.classList.toggle("hidden");
+});
+
+    </script>
+    <div class="model hidden trailer-model">
+        <button class="btn--close-modal">&times;</button>
+        <video src="~/videos/trailer.mp4" controls autoplay loop></video>
+    </div>
+    <div class="model-overlay hidden trailer-overlay"></div>
+    <!-- End Trailler PupUp -->
+    <!-- Start Logout pupup -->
+    <div class="model hidden logout-model">
+        <h2>Are you sure you want to logout?</h2>
+        <div class="actions">
+            <button class="flat logout">Logout</button>
+            <button class="cancel">Cancel</button>
+        </div>
+    </div>
+    <div class="model-overlay hidden logout-overlay"></div>
+    <!-- End Logout pupup -->
+    <!-- Script -->
+    <script src="~/js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+@{
+    ViewData["Title"] = "profile_icon";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Profile Icon</title>
+    <!-- to render normally -->
+    <link rel="stylesheet" href="~/css/normalize.css">
+    <!-- Font awesome file -->
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <!-- Main css file -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <!-- edit profile css file -->
+    <link rel="stylesheet" href="~/css/edit-profile.css">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&family=Roboto:wght@100;300;400;500;700;900&family=Romanesco&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="edit-profile">
+        <div class="container">
+            <div class="title">
+                <h1>Choose Profile Icon</h1>
+            </div>
+            @using (Html.BeginForm(FormMethod.Post)){
+
+            
+            <ul class="icons">
+                <li>
+                    <input type="radio" name="ProfilePicture" value="profile/image-1.jpg" id="cb1"/>
+                <label for="cb1"> 
+                    <img src="~/imgs/profile/image-1.jpg" alt="">
+                </label>
+               </li>
+               <li> 
+                    <input type="radio" name="ProfilePicture" value="profile/image-2.jpg" id="cb2"/>
+                   <label for="cb2">
+                    <img src="~/imgs/profile/image-2.jpg" alt="">
+                </label>
+                </li>
+                <li>
+                    <input type="radio" name="ProfilePicture" value="profile/image-3.jpg" id="cb3" />
+                <label for="cb3">
+                    <img src="~/imgs/profile/image-3.jpg" alt="">
+                </label>
+                </li>
+                <li>
+                     <input type="radio" name="ProfilePicture" value="profile/image-4.jpg" id="cb4"/>
+                 <label for="cb4">
+                    <img src="~/imgs/profile/image-4.jpg" alt="">
+                </label>
+                 </li>
+                 <li>
+                    <input type="radio" name="ProfilePicture" value="profile/image-5.jpg"id="cb5" />
+                <label for="cb5">
+                    <img src="~/imgs/profile/image-5.jpg" alt="">
+                </label>
+                   </li>
+                <li>
+                    <input type ="radio" name="ProfilePicture" value="profile/image-6.jpg" id="cb6"/>
+               <label for="cb6">
+                    <img src="~/imgs/profile/image-6.jpg" alt="">
+                </label>
+                
+                </li>
+            </ul>
+                <div class="actions">
+                <button type ="submit">Save</button>
+                <a href="~/Home/edit_profile" class="flat">Exit</a>
+            </div>
+            }
+ 
+        </div>
+    </div>
+</body>
+
+</html>

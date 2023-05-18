@@ -1,0 +1,471 @@
+﻿`
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model mvc.Models.Movies;
+
+@{
+    ViewData["Title"] = "Movies_info";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <!-- to render normally -->
+    <link rel="stylesheet" href="~/css/normalize.css">
+    <!-- Font awesome file -->
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <!-- Main css file -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/more-info.css" />
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&family=Roboto:wght@100;300;400;500;700;900&family=Romanesco&display=swap"
+          rel="stylesheet">
+    <style>
+        .rating {
+            display: inline-block;
+        }
+
+            .rating input[type="radio"] {
+                display: none;
+            }
+
+            .rating label {
+                font-size: 30px;
+                color: #ccc;
+                cursor: pointer;
+            }
+
+                .rating label:hover,
+                .rating label:hover ~ label,
+                .rating input[type="radio"]:checked ~ label {
+                    color: #ffcc00;
+                }
+    </style>
+</head>
+
+<body>
+    <!-- Start the header -->
+    <div class="main-header">
+        <div class="container">
+            <div class="links">
+                <a href="~/Home/home">
+                    <img src="~/imgs/header-icon.png" alt="logo">
+                </a>
+                <ul>
+                    <li><a href="~/Home/home">Home</a></li>
+                    <li><a href="#tv-shows">TV Shows</a></li>
+                    <li><a href="~/Home/movies">Movies</a></li>
+                    <li><a href="~/Home/watchlist">Watchlist</a></li>
+                </ul>
+            </div>
+            <div class="details">
+                <div class="search">
+                    @using (Html.BeginForm("search", "home", FormMethod.Post))
+                    {
+                        <input type="text" name="value" class="searchField hidden" id="">
+
+                    }
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <a  class="icon">
+                        <!-- <i class="fa-solid fa-user"></i> -->
+                        <img src="~/imgs/@ViewBag.profile_picture" alt="">
+                    </a>
+                </div>
+                <ul>
+                    <li>
+                        <a href="~/Home/edit_profile">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            Edit Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/Home/review">
+                            <i class="fa-regular fa-star"></i>
+                            Your Rating
+                        </a>
+                    </li>
+                    <li>
+                        <button class="logout">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Sign Out
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- End the header -->
+    <div class="movie-details">
+        <div class="container">
+            <div class="header">
+                <div class="title">
+                    <h1>@Model.title</h1>
+                    <p>
+                        <span>@Model.release_date.Substring(@Model.release_date.Length - 4) |</span>
+                        <span>@Model.audience</span>
+                        <span>@Model.duration</span>
+                    </p>
+                </div>
+                <div class="rating">
+                    <div>
+                        <h4>IMBD Rating</h4>
+                        <p class="gold">
+                            <i class="fa-solid fa-star"></i>
+                           @Model.rating
+                        </p>
+                    </div>
+                    <div>
+                        <h4>Your Rating</h4>
+                        <p>
+                            <i class="fa-regular fa-star"></i>
+                            Rate
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="media">
+                <div class="poster">
+                    <div class="image">
+                        <img src="@Url.Content(@Model.poster)" alt="" />
+                    </div>
+                </div>
+                <div class="trailer">
+                    <video src="~/videos/trailer.mp4"></video>
+                </div>
+                <div class="more-details">
+                    <div class="more">
+                        <!-- <video src="~/videos/shazam.mp4"></video> -->
+                        <button>
+                            <i class="fa-brands fa-youtube"></i>
+                            More Videos
+                        </button>
+                    </div>
+                    <div class="more">
+                        <!-- <video src="~/videos/shazam.mp4"></video> -->
+                        <button>
+                            <i class="fa-sharp fa-solid fa-photo-film"></i>
+                            More Photos
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="type">
+                @foreach (var cat in ViewBag.category)
+                {
+                    <span>@cat</span>
+                    
+                }
+               
+       @*         <span>Adventure</span>
+                <span>Comedy</span>*@
+            </div>
+            <p class="description">
+                @Model.brief
+            </p>
+            <div class="details">
+                <h3>Director</h3>
+                <span>@Model.director</span>
+            </div>
+            <div class="details">
+                <h3>Writers</h3>
+                <span>@Model.writer</span>
+            </div>
+            <div class="details">
+                <h3>Stars</h3>
+                @{
+                    int num = 0;
+                }
+                @foreach(var star in ViewBag.stars){
+                    num += 1;
+
+                    <span>@star.name </span>
+                    if(num == 4   )
+                    {
+                        break;
+                    }
+                }
+                
+            </div>
+        </div>
+    </div>
+    <!-- End Movie details -->
+    <!-- Start Awards -->
+    <div class="awards">
+        <div class="container">
+            <p>
+                <span>Awards</span>
+                @Model.won  
+                @if (@Model.won != null)
+                {
+                    @Html.Raw("&")
+                }
+                @Model.nominated
+            </p>
+        </div>
+    </div>
+    <!-- End Awards -->
+    <!-- Start Top Cast -->
+    <div class="top-cast">
+        <div class="container">
+            <div class="section-title">
+                <h3>Top Cast ></h3>
+            </div>
+            <div class="cast">
+             @foreach(var star in ViewBag.stars){              
+            @foreach(var crew in ViewBag.crew){
+        
+                
+     
+                    @if (@crew.PersonId == @star.Id)
+                    {
+                            <div class="actor">
+                     
+                                <div class="avatar">
+                                    <img src="~/imgs/@star.profile_picture" alt="">
+                                </div>
+                                <div class="names">
+                                    <span class="actor-name">@star.name</span>
+                                    <span class="movie-name">@crew.character_name</span>
+                                </div>
+                            </div>
+                    }
+               
+       
+              
+             
+          
+                }
+
+            }
+            </div>
+              @*      <div class="actor">
+                    <div class="avatar">
+                        <img src="~/imgs/profile/image-2.jpg" alt="">
+                    </div>
+                    <div class="names">
+                        <span class="actor-name">Zachry</span>
+                        <span class="movie-name">Shazam</span>
+                    </div>
+                </div>
+                <div class="actor">
+                    <div class="avatar">
+                        <img src="~/imgs/profile/image-3.jpg" alt="">
+                    </div>
+                    <div class="names">
+                        <span class="actor-name">Zachry</span>
+                        <span class="movie-name">Shazam</span>
+                    </div>
+                </div>
+                <div class="actor">
+                    <div class="avatar">
+                        <img src="~/imgs/profile/image-4.jpg" alt="">
+                    </div>
+                    <div class="names">
+                        <span class="actor-name">Zachry</span>
+                        <span class="movie-name">Shazam</span>
+                    </div>
+                </div>*@
+            
+        </div>
+    </div>
+    <!-- End Top Cast  -->
+    <!-- Start Storyline  -->
+    <div class="storyline">
+        <div class="container">
+            <div class="section-title">
+                <h3>Storyline ></h3>
+            </div>
+            <p>
+               @Model.story_line
+            </p>
+        </div>
+    </div>
+    <!-- End Storyline  -->
+    <!-- Start Details -->
+    <div class="details-section">
+        <div class="container">
+            <div class="section-title">
+                <h3>Details ></h3>
+            </div>
+            <div class="details">
+                <h3>Release Date</h3>
+                <span>@Model.release_date @foreach(var countries in ViewBag.countries){<span>(@countries.country)</span> break;}</span>
+            </div>
+            <div class="details">
+                <h3>Countries of origin</h3>
+                @foreach (var countries in ViewBag.countries)
+                    {
+                       <span> @countries.country | </span>
+                      
+                    } 
+            </div>
+            <div class="details">
+                <h3>Director</h3>
+                @foreach(var comp in ViewBag.companies){
+                <span>@comp.name | </span>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- End Details -->
+    <!-- Start Reviews -->
+    <div class="reviews-section">
+        <div class="container">
+            <div class="section-title">
+                <h3>Reviews ></h3>
+                <button class="reviewBtn">+ Review</button>
+            </div>
+            @foreach (var rev in ViewBag.reviews){
+                @foreach(var user in ViewBag.username){
+              @if(user.id == rev.UserId){
+            <div class="review">
+                 @rev.rating_text
+                <span class="triangle-down"></span>
+                
+                <span class="user">@Html.Raw("@")@user.name</span>
+                    
+            </div>
+                    }
+                }
+            }
+        </div>
+    </div>
+    <!-- End Reviews -->
+    <!-- Start Review pupup -->
+    <div class="model hidden review-model">
+        <h3>Your Rating:</h3>
+    
+
+           @using(Html.BeginForm("reviewSubmit","Home",FormMethod.Post)){
+                @Html.Hidden("itemId", @Model.Id)
+                @Html.Hidden("itemType", @Model.itemType)
+            int x = 2;
+            @if(Model.Id < 6)
+            {
+                 x += Model.Id + 3;
+            }
+           
+            <div class="rating">
+            
+                <input type="hidden" name="rating" id="rating" value="@x">
+                <label for="star1">&#9733;</label>
+          
+                <input type="radio" name="rating" id="star1" value=@x++>
+                <label for="star2">&#9733;</label>
+              
+                <input type="radio" name="rating" id="star2" value=@x++> 
+                <label for="star3">&#9733;</label>
+                <input type="radio" name="rating" id="star3" value="3">
+                <label for="star4">&#9733;</label>
+                <input type="radio" name="rating" id="star4" value="4">
+                <label for="star5">&#9733;</label>
+                <input type="radio" name="rating" id="star5" value="5">
+                <label for="star1">&#9733;</label>
+
+                <input type="radio" name="rating" id="star1" value=@x++>
+                <label for="star2">&#9733;</label>
+
+                <input type="radio" name="rating" id="star2" value=@x++>
+                <label for="star3">&#9733;</label>
+                <input type="radio" name="rating" id="star3" value="3">
+                <label for="star4">&#9733;</label>
+                <input type="radio" name="rating" id="star4" value="4">
+                <label for="star5">&#9733;</label>
+                <input type="radio" name="rating" id="star5" value="5">
+            </div>
+         
+            <input type="hidden" name="rating" id="rating-input" value="0">
+            <textarea name="review" placeholder="Write your review"></textarea>
+            <div class="spilers">
+                <p>Does this review contains spilers?</p>
+                <div class="checkbox">
+                    <div>
+                        <input type="radio" id="yes" name="spoiler" value="yes">
+                        <label for="yes">Yes</label>
+                        <input type="radio" id="no" name="spoiler" value="no">
+                        <label for="no">No</label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit">Submit</button>
+       }
+
+            <script>
+            "use-strict";
+
+            const reviewShowBtn = document.querySelector(".reviewBtn");
+            const reviewModel = document.querySelector(".review-model");
+            const reviewOverlay = document.querySelector(".review-overlay");
+
+            const openModel = (model, overlay) => {
+                model.classList.remove("hidden");
+                overlay.classList.remove("hidden");
+            };
+
+            const closeModel = (model, overlay) => {
+                model.classList.add("hidden");
+                overlay.classList.add("hidden");
+            };
+
+            reviewShowBtn.addEventListener(
+                "click",
+                openModel.bind(null, reviewModel, reviewOverlay)
+            );
+
+            reviewOverlay.addEventListener(
+                "click",
+                closeModel.bind(null, reviewModel, reviewOverlay)
+            );
+
+                const stars = document.querySelectorAll('.rating input[type="radio"]');
+                const ratingValue = document.querySelector('#rating');
+               
+                stars.forEach(star => {
+                    star.addEventListener('click', () => {
+                        ratingValue.value = star.value;
+                    });
+                });
+            const form = document.querySelector('form');
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const ratingValue = document.querySelector('#rating').value;
+
+                // Send AJAX request to server
+                fetch('/Home/SaveRating', {// submitR
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ rating: ratingValue })
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            console.log('Rating saved successfully');
+                        } else {
+                            console.error('Failed to save rating');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Failed to send request', error);
+                    });
+            });
+    
+            </script>
+        
+    </div>
+    <div class="model-overlay hidden review-overlay"></div>
+    <!-- End Review pupup -->
+ 
+
+    <script src="~/js/more-info.js"></script>
+</body>
+
+</html>

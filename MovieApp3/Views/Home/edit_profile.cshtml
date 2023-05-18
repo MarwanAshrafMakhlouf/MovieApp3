@@ -1,0 +1,75 @@
+@{
+    ViewData["Title"] = "edit_profile";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit profile</title>
+    <!-- to render normally -->
+    <link rel="stylesheet" href="~/css/normalize.css">
+    <!-- Font awesome file -->
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <!-- Main css file -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <!-- edit profile css file -->
+    <link rel="stylesheet" href="~/css/edit-profile.css">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&family=Roboto:wght@100;300;400;500;700;900&family=Romanesco&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="edit-profile">
+        <div class="container">
+            <div class="title">
+                <h1>Edit Profile</h1>
+            </div>
+            <div class="content">
+                <div class="image">
+                    <img src= "~/imgs/@ViewBag.profile_picture" alt="">
+                    <a href="~/Home/profile_icon">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                </div>
+                <div class="inputs">
+                 @using (Html.BeginForm(FormMethod.Post)){
+              
+                
+                    <div class="name">
+                        <label for="name">Name : </label>
+                        <input type="text" name="name" id = "name" placeholder=@ViewBag.name>
+                    </div>
+                     <div class="gender">
+                        <label for="gender">Gender :</label>
+                        <select name="gender" id="gender" placeholder=@ViewBag.gender>
+           
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                         
+                        </select>
+                    </div>
+                    <div class="date">
+                        <label for="date">Date of birth :</label>
+                        <input type="date" name="dateOfBirth" id="date" placeholder=@ViewBag.birth>
+                    </div>
+            
+         
+            <div class="actions">
+                <button>Save</button>
+                <a href="~/Home/home" class="flat">Exit</a>
+            </div>
+            }
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

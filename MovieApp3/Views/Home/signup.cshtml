@@ -1,0 +1,66 @@
+    @{
+    ViewData["Title"] = "signup";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/auth-style.css">
+    <title>Signup</title>
+</head>
+
+<body>
+    <div class="background"></div>
+    <div class="overlay"></div>
+@*    <div class="main-header">
+        <a href="~/Home/home">
+            <img src="~/imgs/logo.png" alt="logo">
+        </a>
+        <!-- <ul>
+            <li><a href="~/Home/login">Login</a></li>
+        </ul> -->
+    </div>*@
+    <div class="container">
+        @using(Html.BeginForm())
+        {
+        <form>
+        <div class="form-control">
+            <h1>Create new account</h1>
+            <div class="control">
+                <input type="text" name="name" placeholder="Enter your name">
+            </div>
+            <div class="control">
+                <input type="email" name="email" placeholder="Enter your email">
+            </div>
+            <div class="control">
+                <input type="password" name="password" placeholder="*********">
+            </div>
+            <div class="checkbox">
+                <div>
+                    <input type="checkbox" name="rememberMe" id="rememberMe">
+                    <label for="rememberMe">I agree to the <span class="underlined">Privacy Policy</span></label>
+                </div>
+            </div>
+            <div class="action">
+                <button class="control btn" type="submit">Signup</button>
+                <a class="control btn google">
+                    <img src="~/imgs/Google-Icon.jpg" alt="google">
+                    Signup With Google
+                </a>
+            </div>
+            <p>Already have an account? <a href="~/Home/login">Login</a> </p>
+            <h3 style="color:red">@ViewBag.Id</h3>
+            </form>
+        }   
+        </div>
+        <div class="image">
+            <img src="~/imgs/logo.png" alt="movie inc">
+        </div>
+    </div>
+</body>
+
+</html>

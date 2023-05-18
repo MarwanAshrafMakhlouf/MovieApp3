@@ -1,0 +1,229 @@
+/* Start Edit profile */
+.edit-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .edit-profile {
+        height: 100vh;
+    }
+}
+
+.edit-profile .title h1 {
+    font-size: 40px;
+    border-bottom: 2px solid white;
+    padding-bottom: 6px;
+}
+
+@media (max-width: 767px) {
+    .edit-profile .title h1 {
+        font-size: 26px;
+    }
+}
+
+.edit-profile .content {
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+    gap: 40px;
+}
+
+@media (max-width: 767px) {
+    .edit-profile .content {
+        flex-direction: column;
+    }
+}
+
+.edit-profile .content .image {
+    position: relative;
+}
+
+.edit-profile .content .image img {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 6px;
+}
+
+.edit-profile .content .image a {
+    position: absolute;
+    bottom: 10px;
+    left: 5px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.edit-profile .content .inputs {
+    flex: 1;
+}
+
+.edit-profile .content .inputs input:focus {
+    outline: none;
+}
+
+.edit-profile .content .inputs input::placeholder {
+    color: white;
+}
+
+.edit-profile .content .inputs .name input,
+.edit-profile .inputs .gender select,
+.edit-profile .inputs .date input {
+    background-color: #b29c9c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    width: 300px;
+}
+
+.edit-profile .inputs label {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.edit-profile .inputs .gender,
+.edit-profile .inputs .date {
+    margin-top: 20px;
+}
+
+.edit-profile .inputs .name,
+.edit-profile .inputs .gender,
+.edit-profile .inputs .date {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 450px;
+}
+
+
+.edit-profile .container .actions {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.edit-profile .container .actions a,
+.edit-profile .container .actions button {
+    padding: 10px 100px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 16px;
+    background-color: white;
+    text-decoration: none;
+    color: black;
+    transition: var(--mainTransition);
+}
+
+@media (max-width: 767px) {
+
+    .edit-profile .container .actions a,
+    .edit-profile .container .actions button {
+        display: block;
+        margin-bottom: 25px;
+    }
+}
+
+.edit-profile .container .actions a.flat {
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+}
+
+.edit-profile .container .actions button:hover,
+.edit-profile .container .actions a.flat:hover {
+    background-color: var(--mainColor);
+    color: white;
+}
+
+.edit-profile .container .actions a.flat:hover {
+    border-color: var(--mainColor);
+}
+
+/* End Edit profile */
+
+/* start profile icon */
+
+.edit-profile .container .icons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 60px;
+}
+
+@media (max-width: 767px) {
+    .edit-profile .container .icons {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+    }
+}
+
+.edit-profile .container .icons img {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 6px;
+    transition-duration: 0.2s;
+    transform-origin: 50% 50%;
+}
+
+/* el select */
+
+ul.icons {
+    list-style-type: none;
+}
+
+.icons li {
+    display: inline-block;
+}
+
+.icons input[type="radio"][id^="cb"] {
+    display: none;
+}
+
+.icons label {
+    /* border: 1px solid #fff; */
+    padding: 10px;
+    display: block;
+    position: relative;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.icons label:before {
+    background-color: white;
+    color: white;
+    content: " ";
+    display: block;
+    border-radius: 50%;
+    border: 1px solid var(--mainColor);
+    position: absolute;
+    top: -12px;
+    left: -14px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 28px;
+    transition-duration: 0.4s;
+    transform: scale(0);
+}
+
+.icons :checked+label {
+    border-color: var(--mainColor);
+}
+
+.icons :checked+label:before {
+    content: "✓";
+    background-color: var(--mainColor);
+    transform: scale(1);
+}
+
+.icons :checked+label img {
+    transform: scale(0.9);
+    box-shadow: 0 0 5px #333;
+    z-index: -1;
+}
+
+/* End profile icon */

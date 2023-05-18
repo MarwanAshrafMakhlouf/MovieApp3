@@ -1,0 +1,267 @@
+@using mvc.Models
+@model WatchlistViewModel
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <!-- to render normally -->
+    <link rel="stylesheet" href="~/css/normalize.css">
+    <!-- Font awesome file -->
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <!-- Main css file -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/watchlist.css">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&family=Roboto:wght@100;300;400;500;700;900&family=Romanesco&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+    <!-- Start the header -->
+    <div class="main-header">
+        <div class="container">
+            <div class="links">
+                <a href="~/Home/home">
+                    <img src="~/imgs/header-icon.png" alt="logo">
+                </a>
+                <ul>
+                    <li><a href="~/Home/home">Home</a></li>
+                    <li><a href="#tv-shows">TV Shows</a></li>
+                    <li><a href="~/Home/movies">Movies</a></li>
+                    <li><a class ="active" href="~/Home/watchlist">Watchlist</a></li>
+                </ul>
+            </div>
+            <div class="details">
+                <div class="search">
+                    <input type="text" name="search" class="searchField hidden" id="">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <a class="icon">
+                        <!-- <i class="fa-solid fa-user"></i> -->
+                        <img src="~/imgs/@ViewBag.profile_picture" alt="">
+                    </a>
+                </div>
+                <ul>
+                    <li>
+                        <a href="~/Home/edit_profile">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            Edit Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/Home/review">
+                            <i class="fa-regular fa-star"></i>
+                            Your Rating
+                        </a>
+                    </li>
+                    <li>
+                        <button class="logout">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Sign Out
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="watchlist">
+        <div class="container">
+            <div class="main-title">
+                <div class="head">
+                    <h1>Your Watchlist</h1>
+                    <button><i class="fa-regular fa-pen-to-square"></i> Edit</button>
+                </div>
+                <p><i class="fa-solid fa-lock"></i> Private</p>
+            </div>
+
+
+            @if (Model.WatchlistItems != null)
+            {
+                @foreach (var item in Model.WatchlistItems)
+                {
+                    switch (item.itemType)
+                    {
+                        case "movie":
+                            var movie = Model.Movies[item.ItemId];
+                            <div class="card">
+                              <div class="image">
+                            <a href ="@Url.Action("movie_info","Home",new{movieId = @movie.Id})">
+                                <img src="@Url.Content(@movie.poster)" alt=""/>
+                            </a>
+                          
+                           
+                        </div>
+                                <div class="content">
+                                    <div class="title">
+                                        <p>@movie.title</p>
+                                        @using (Html.BeginForm("ToggleWatchlistItem", "Home", FormMethod.Post))
+                                        {
+                                            @Html.Hidden("itemId", @movie.Id)
+                                            @Html.Hidden("isOnWatchlist", @movie.isOnWatchlist)
+                                            @Html.Hidden("itemType",@movie.itemType)
+                                            @Html.Hidden("removeFromWatchlist", true)
+                                            <button type="submit">X</button>
+                                        }
+                                    </div>
+                                    <p class="details">
+                                        <span>@movie.release_date|</span>
+                                        <span>@movie.duration|</span>
+                                        <span>@movie.audience</span>
+                                    </p>
+                                    <div class="stars">
+                                        <span class="rate">
+                                            <i class="fa-solid fa-star"></i>
+                                            @movie.rating
+                                        </span>
+                                        <span>
+                                            <i class="fa-regular fa-star"></i>
+                                            Rate
+                                        </span>
+                                    </div>
+                                    <div class="description">
+                                        @movie.brief
+                                    </div>
+                                </div>
+                            </div>
+                            break;
+                    }
+
+                }
+            }
+
+        </div>
+    </div>
+    <!-- end Most popular section -->
+    <!-- Start Footer -->
+    <div class="footer">
+        <div class="container">
+            <!-- <img src="~/imgs/background.jpg" alt=""> -->
+            <p>We are social</p>
+            <div class="social-icons">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fas fa-home"></i>
+                <i class="fab fa-linkedin"></i>
+            </div>
+            <p class="copyright">&copy; 2023 <span>Movie</span> All Right Reserved</p>
+        </div>
+    </div>
+    <div class="model hidden trailer-model">
+        <button class="btn--close-modal">&times;</button>
+        <video src="~/videos/trailer.mp4" controls autoplay loop></video>
+    </div>
+    <div class="model-overlay hidden trailer-overlay"></div>
+    <!-- End Trailler PupUp -->
+    <!-- Start Logout pupup -->
+    <div class="model hidden logout-model">
+        <h2>Are you sure you want to logout?</h2>
+        <div class="actions">
+            <a class="logoutLink" href="~/Home/signup" class="flat logout">Logout</a>
+            <button class="cancel">Cancel</button>
+        </div>
+    </div>
+    <div class="model-overlay hidden logout-overlay"></div>
+
+    <!-- End Footer
+    <script  async src="~/Views/Home/script.js"></script>
+    -->
+    <script>
+        "use-strict";
+
+        const trailerModel = document.querySelector(".trailer-model");
+        const trailerOverlay = document.querySelector(".trailer-overlay");
+        const showTrailerBtns = document.querySelectorAll(".showTrailerBtn");
+        const closeTrailerBtn = document.querySelector(".btn--close-modal");
+
+        const showLogoutBtn = document.querySelector(".logout");
+        const closeLogoutBtn = document.querySelector(".cancel");
+        const logoutModel = document.querySelector(".logout-model");
+        const logoutOverlay = document.querySelector(".logout-overlay");
+
+        const toggleFilterBtn = document.querySelector(".filter");
+        const filteredData = document.querySelector(".filter-data ");
+
+        const searchField = document.querySelector(".searchField");
+        const toggleSearchBtn = document.querySelector(".fa-magnifying-glass");
+
+        const openModel = (model, overlay) => {
+            model.classList.remove("hidden");
+            overlay.classList.remove("hidden");
+        };
+
+        const closeModel = (model, overlay) => {
+            model.classList.add("hidden");
+            overlay.classList.add("hidden");
+        };
+
+        // == Start Trailer Btns ==
+        showTrailerBtns.forEach((btn) =>
+            btn.addEventListener(
+                "click",
+                openModel.bind(null, trailerModel, trailerOverlay)
+            )
+        );
+        closeTrailerBtn.addEventListener(
+            "click",
+            closeModel.bind(null, trailerModel, trailerOverlay)
+        );
+        trailerOverlay.addEventListener(
+            "click",
+            closeModel.bind(null, trailerModel, trailerOverlay)
+        );
+        // == End Trailer Btns ==
+
+        // == Start Logout  ==
+        showLogoutBtn.addEventListener(
+            "click",
+            openModel.bind(null, logoutModel, logoutOverlay)
+        );
+
+        closeLogoutBtn.addEventListener(
+            "click",
+            closeModel.bind(null, logoutModel, logoutOverlay)
+        );
+
+        logoutOverlay.addEventListener(
+            "click",
+            closeModel.bind(null, logoutModel, logoutOverlay)
+        );
+        // == End Logout  ==
+        // == Filter ==
+        toggleFilterBtn.addEventListener("click", () => {
+            filteredData.classList.toggle("hidden");
+        });
+        // == Filter ==
+        // == Search ==
+        toggleSearchBtn.addEventListener("click", () => {
+            searchField.classList.toggle("hidden");
+        });
+
+    </script>
+    <div class="model hidden trailer-model">
+        <button class="btn--close-modal">&times;</button>
+        <video src="~/videos/trailer.mp4" controls autoplay loop></video>
+    </div>
+    <div class="model-overlay hidden trailer-overlay"></div>
+    <!-- End Trailler PupUp -->
+    <!-- Start Logout pupup -->
+    <div class="model hidden logout-model">
+        <h2>Are you sure you want to logout?</h2>
+        <div class="actions">
+            <button class="flat logout">Logout</button>
+            <button class="cancel">Cancel</button>
+        </div>
+    </div>
+    <div class="model-overlay hidden logout-overlay"></div>
+    <!-- End Logout pupup -->
+    <!-- Script -->
+    <script src="~/js/script.js"></script>
+</body>
+
+
+</html>

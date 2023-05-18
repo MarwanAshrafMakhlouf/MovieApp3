@@ -1,0 +1,132 @@
+.watchlist {
+    margin-top: 120px;
+}
+
+.watchlist .container .main-title {
+    background-color: #FFFFFF66;
+    margin-bottom: 25px;
+}
+
+.watchlist .container .main-title p {
+    margin: 0;
+    margin-left: 20px;
+    padding-bottom: 10px;
+}
+
+.watchlist .main-title .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.watchlist .container .main-title h1 {
+    font-size: 45px;
+    margin: 0;
+    padding: 25px 0;
+    position: relative;
+    margin-left: 20px;
+}
+
+.watchlist .container .main-title h1::before {
+    content: '';
+    position: absolute;
+    background-color: var(--mainColor);
+    top: 26px;
+    left: -12px;
+    width: 5px;
+    height: 50%;
+    border-radius: 10px;
+}
+
+.watchlist .container .main-title button {
+    background-color: transparent;
+    border-radius: 6px;
+    border: 1px solid white;
+    color: white;
+    height: 40px;
+    margin-right: 20px;
+    padding: 0 30px;
+    font-weight: bold;
+}
+
+.container .card {
+    background-color: #262626;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid var(--mainColor);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    margin: 10px 0;
+}
+
+@media (max-width: 767px) {
+    .container .card {
+        flex-direction: column;
+    }
+}
+
+.container .card::after,
+.container .card::before {
+    position: absolute;
+    cursor: pointer;
+    left: 5px;
+}
+
+.container .card::before {
+    content: '';
+    top: 0;
+    width: 20px;
+    height: 28px;
+    text-align: center;
+    padding-top: 5px;
+    background-color: var(--mainColor);
+}
+
+.container .card::after {
+    content: '';
+    top: 13px;
+    border-top: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-bottom: 10px solid white;
+}
+
+.container .card img {
+    max-width: 250px;
+    max-height: 300px;
+}
+
+.card .content {
+    flex: 1;
+    padding: 0 10px;
+}
+
+.card .content .title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card .content .title p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card .content .title button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.card .content .stars {
+    margin: 20px 0;
+}
+
+.card .content .stars .rate i {
+    color: gold;
+}
+
+.card .content .description {
+    color: white;
+}

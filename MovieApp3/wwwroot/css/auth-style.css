@@ -1,0 +1,168 @@
+body {
+    overflow: hidden;
+}
+
+/* Start Edit */
+.background {
+    position: absolute;
+    background-image: url(../imgs/background.jpg);
+    z-index: -1100;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 150%;
+    transform: rotate(8deg);
+    transform-origin: top;
+}
+
+@media (max-width: 768px) {
+    .background {
+        width: 100%;
+        height: 100%;
+        transform: rotate(0deg);
+    }
+}
+
+/* End Edit */
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: -1000;
+    background-color: #000000d6;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100vh;
+}
+
+.container .form-control {
+    width: 400px;
+}
+
+@media (max-width: 767px) {
+    .container .form-control {
+        width: 350px;
+    }
+}
+
+.form-control h1 {
+    font-size: 28px;
+    color: white;
+}
+
+.form-control .control {
+    display: block;
+    width: 100%;
+    margin: 16px 0;
+}
+
+.control input {
+    display: block;
+    padding: 12px;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 10px;
+    width: 100%;
+    color: white;
+}
+
+.control input:focus {
+    outline: none;
+    border-color: var(--altColor);
+    color: var(--mainColor);
+}
+
+.control input::placeholder {
+    color: white;
+}
+
+.control input:focus::placeholder {
+    color: var(--mainColor);
+}
+
+.form-control .checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form-control .checkbox label {
+    color: white;
+    font-size: 14px;
+}
+
+.form-control .checkbox a {
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.form-control .checkbox span {
+    text-decoration: underline;
+}
+
+.control.btn {
+    padding: 12px;
+    background-color: var(--mainColor);
+    color: white;
+    border: 1px solid var(--mainColor);
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
+}
+
+.control.btn:hover,
+.control.btn:active {
+    background-color: var(--altColor);
+    border-color: var(--altColor);
+    cursor: pointer;
+}
+
+.control.btn:focus {
+    outline: none;
+}
+
+.control.btn.google {
+    background-color: transparent;
+    border-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control.btn.google img {
+    width: 16px;
+    margin-right: 8px;
+}
+
+.form-control p {
+    color: white;
+    text-align: center;
+    font-size: 14px;
+}
+
+.form-control p a {
+    color: white;
+    text-decoration: none;
+}
+
+.form-control p a:hover {
+    text-decoration: underline;
+}
+
+.container .image img {
+    max-width: 600px;
+}
+
+@media (max-width: 1023px) {
+    .container .image {
+        display: none;
+    }
+}

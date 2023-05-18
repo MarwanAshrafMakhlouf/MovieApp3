@@ -1,0 +1,52 @@
+.addToList {
+    background-color: var(--mainColor);
+    padding: 15px 90px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    margin: 30px 0;
+    position: absolute;
+    right: 120px;
+    cursor: pointer;
+}
+
+/* Start Known For */
+.known {
+    padding: 60px 0;
+}
+
+.movies-container {
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+}
+
+.movies-container .movie-card {
+    display: flex;
+    max-height: 200px;
+}
+
+.actor-container {
+    grid-template-columns: repeat(auto-fill, minmax(1000px, 1fr));
+}
+
+
+.movies-container .movie-card .icon img {
+    width: 122px;
+    height: 200px;
+}
+
+.movies-container .movie-card .content {
+    padding: 0 30px;
+    padding-left: 10px;
+    width: 100%;
+}
+
+.movies-container .movie-card .content h3 {
+    margin: 20px 0;
+}
+
+.movies-container .movie-card .content .type {}
+
+.movies-container .movie-card .content .date {}
+
+/* End Known For */

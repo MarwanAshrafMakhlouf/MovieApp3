@@ -1,0 +1,125 @@
+﻿@using mvc.Models
+@model reviewedItems
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <!-- to render normally -->
+    <link rel="stylesheet" href="~/css/normalize.css">
+    <!-- Font awesome file -->
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <!-- Main css file -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/your-rating.css">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&family=Roboto:wght@100;300;400;500;700;900&family=Romanesco&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+    <!-- Start the header -->
+    <div class="main-header">
+        <div class="container">
+            <div class="links">
+                <a href="~/Home/home">
+                    <img src="~/imgs/header-icon.png" alt="logo">
+                </a>
+                <ul>
+                    <li><a href="~/Home/home">Home</a></li>
+                    <li><a href="~/Home/tv_shows">TV Shows</a></li>
+                    <li><a href="~/Home/movies">Movies</a></li>
+                    <li><a href="~/Home/watchlist">Watchlist</a></li>
+                </ul>
+            </div>
+            <div class="details">
+                <a href="./login.html" class="icon">
+                    <!-- <i class="fa-solid fa-user"></i> -->
+                    <img src="~/imgs/profile/image-1.jpg" alt="">
+                </a>
+                <ul>
+                    <li>
+                        <a href="~/Home/edit-profile">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            Edit Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/Home/your-rating">
+                            <i class="fa-regular fa-star"></i>
+                            Your Rating
+                        </a>
+                    </li>
+                    <li>
+                        <button class="logout">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Sign Out
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- End the header -->
+    <!-- Start Your Rating -->
+    <div class="rating">
+        <div class="container">
+            <div class="main-title">
+                <div class="head">
+                    <h1>Your Rating</h1>
+                    <button><i class="fa-regular fa-pen-to-square"></i> Edit</button>
+                </div>
+            </div>
+
+            <p> 1 Title </p>
+            @foreach(var item in Model.Reviews){
+                switch (item.itemType)
+                {
+                    case "movie":
+                        var movie = Model.Movies[item.itemId];
+                        <div class="card">
+                            <div class="image">
+                                <a href="@Url.Action("movie_info","Home",new{movieId = @movie.Id})">
+                                    <img src="@Url.Content(@movie.poster)" alt="" />
+                                </a>
+                            </div>
+                            <div class="content">
+                                <div class="title">
+                                    <p>@movie.title</p>
+                                    <!-- <button>X</button> -->
+                                </div>
+                                <p class="details">
+                                    <span>@movie.release_date</span>
+                                   
+                                </p>
+                                <div class="stars">
+                                    <span class="rate">
+                                        <i class="fa-solid fa-star"></i>
+                                     @item.rating
+                                    </span>
+                                </div>
+                                <div class="spoi">
+                                @if(item.spoiler == true)
+                                {
+                                        <span style="color:#FB4F1D;" >!Spoiler <br /></span>
+                                }
+                                </div>
+                                <div class="description">
+                                    @item.rating_text
+                                </div>
+                            </div>
+                        </div>
+                        break;
+                }
+            }
+        </div>
+    </div>
+    <!-- End Your Rating -->
+</body>
+
+</html>

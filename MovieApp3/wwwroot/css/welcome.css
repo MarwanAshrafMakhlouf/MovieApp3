@@ -1,0 +1,22 @@
+.welcome-background {
+    background-image: url(../imgs/welcome.jpg);
+    background-size: cover;
+    position: relative;
+    height: 100vh;
+    z-index: -1100;
+}
+
+.main-header .container .details a {
+    text-decoration: none;
+    color: white;
+}
+
+.main-header .container .details a:hover {
+    text-decoration: underline;
+}
+
+.landing .container .action button.flat {
+    width: 320px;
+    font-weight: bold;
+    font-size: 20px;
+}

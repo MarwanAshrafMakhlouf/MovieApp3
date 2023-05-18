@@ -1,0 +1,64 @@
+    @{
+    ViewData["Title"] = "login";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/auth-style.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="background"></div>
+    <div class="overlay"></div>
+
+    <div class="main-header">
+
+        <!-- <ul>
+            <li><a href="~/Home/signup">Signup</a></li>
+        </ul> -->
+    </div>
+
+    <div class="container">
+        <div class="form-control">
+            <h1>Welcome back</h1>
+    @using(Html.BeginForm())
+        {
+            <form>
+            <div class="control">
+                <input type="email" name="email" placeholder="Enter your email">
+            </div>
+            <div class="control">
+                <input type="password" name="password" placeholder="*********">
+            </div>
+            <div class="checkbox">
+                <div>
+                    <input type="checkbox" name="rememberMe" id="rememberMe">
+                    <label for="rememberMe">Remember me</label>
+                </div>
+                <a href="#">Forget password?</a>
+            </div>
+            <div class="action">
+                <button class="control btn" type="submit">Login</button>
+                <a class="control btn google">
+                    <img src="~/imgs/Google-Icon.jpg" alt="google">
+                    Login With Google
+                </a>
+            </div>
+            <p>Don't have an account? <a href="~/Home/signup">Signup</a> </p>
+            <h3 style="color:red">@ViewBag.Error</h3>
+            </form>
+        }
+        </div>
+        <div class="image">
+            <img src="~/imgs/logo.png" alt="movie inc">
+        </div>
+    </div>
+</body>
+
+</html>

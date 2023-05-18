@@ -1,0 +1,150 @@
+﻿
+
+@{
+    ViewData["Title"] = "filter";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <!-- to render normally -->
+    <link rel="stylesheet" href="~/css/normalize.css">
+    <!-- Font awesome file -->
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <!-- Main css file -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&family=Roboto:wght@100;300;400;500;700;900&family=Romanesco&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+    <!-- Start the header -->
+    <div class="main-header">
+        <div class="container">
+            <a href="~/Home/home">
+                <img src="~/imgs/logo.png" alt="logo">
+            </a>
+            <div class="links">
+                <ul>
+                    <li><a href="~/Home/home">Home</a></li>
+                    <li><a href="#tv-shows">TV Shows</a></li>
+                    <li><a href="#movies">Movies</a></li>
+                    <li><a href="~/Home/watchlist">Watchlist</a></li>
+                </ul>
+                <div class="details">
+                    <a href="~/Home/login" class="icon">
+                        <!-- <i class="fa-solid fa-user"></i> -->
+                        <img src="~/imgs/@ViewBag.profile_picture" alt="">
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="~/Home/edit_profile">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                Edit Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/Home/welcome">
+                                <i class="fa-solid fa-right-to-bracket"></i>
+                                Sign Out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End the header -->
+    <!-- Start Landing section -->
+    <div class="landing">
+        <!-- Start Background -->
+        <div class="home-background"></div>
+        <div class="overlay"></div>
+        <!-- End Background -->
+        <div class="container">
+            <h1>Shazam</h1>
+            <div class="action">
+                <button>View full trailer</button>
+                <button class="flat">More Info</button>
+            </div>
+        </div>
+    </div>
+    <!-- End Landing section -->
+    <!-- Start What to watch Section -->
+    <div class="what-to-watch" id="tv-shows">
+        <div class="container">
+      
+            @using (Html.BeginForm("filtered", "Home", FormMethod.Post))
+            {
+
+                <div class="section-title">
+                    <h3>Top picks ></h3>
+                    <button type="button" class="filter">
+                        <i class="fa-solid fa-sliders"></i>
+                        <span>Filter</span>
+                    </button>
+                    <ul class="filter-data hidden">
+                        <li>
+                            <button name="filter" value="Action">Action</button>
+                            <button name="filter" value="Adventure">Adventure</button>
+                            <button name="filter" value="Anime">Anime</button>
+                        </li>
+                        <li>
+                            <button name="filter" value="Biography">Biography</button>
+                            <button name="filter" value="Comedy">Comedy</button>
+                            <button name="filter" value="Drama">Drama</button>
+                        </li>
+                        <li>
+                            <button name="filter" value="Family">Family</button>
+                            <button name="filter" value="Fantansy">Fantansy</button>
+                            <button name="filter" value="Film-Noir">Film-Noir</button>
+                        </li>
+                        <li>
+                            <button name="filter" value="History">History</button>
+                            <button name="filter" value="Horror">Horror</button>
+                            <button name="filter" value="Music">Music</button>
+                        </li>
+                        <li>
+                            <button name="filter" value="Mystery">Mystery</button>
+                            <button name="filter" value="Romance">Romance</button>
+                            <button name="filter" value="Sci-Fic">Sci-Fic</button>
+                        </li>
+                        <li>
+                            <button name="filter" value="Thriller">Thriller</button>
+                            <button name="filter" value="Thriller">War</button>
+                            <button name="filter" value="Western">Western</button>
+                        </li>
+                    </ul>
+                </div>
+            }
+            </div>
+            </div>
+            @using (Html.BeginForm("filtered","Home",FormMethod.Post))
+            {
+                <form>
+                    <div class="form-control">
+                        <label for="filters">choose a filter:</label>
+                        <select name="filter" id="filter">
+                            <option value="Action">Action</option>
+                            <option value="Comedy">Comedy</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Adventure">Adventure</option>
+                        </select>
+                        <div class="action">
+                            <button class="control btn" type="submit">Signup</button>
+                      
+                        </div>
+                        <p>Already have an account? <a href="~/Home/login">Login</a> </p>
+                        <h3 style="color:red">@ViewBag.Id</h3>
+                </form>
+            }
+</body>
+
+</html>
